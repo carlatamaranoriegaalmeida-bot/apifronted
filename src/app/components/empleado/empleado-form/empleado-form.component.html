@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-body">
+    <h1>{{ editing ? 'Editar Empleado' : 'Registro de Nuevo Empleado' }}</h1>
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="alert alert-success" role="status">{{ successMessage }}</div>
+
+    <form #form="ngForm" (ngSubmit)="submit(form)">
+      <div class="form-group mb-3">
+        <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" [(ngModel)]="employeeForm.name" required>
+        <small *ngIf="form.controls['name']?.touched && form.controls['name']?.hasError('required')" class="text-danger">{{ messages.validation.nameRequired }}</small>
+      </div>
+      <div class="form-group mb-3">
+        <input type="text" name="position" class="form-control" placeholder="Ingrese su cargo" [(ngModel)]="employeeForm.position" required>
+        <small *ngIf="form.controls['position']?.touched && form.controls['position']?.hasError('required')" class="text-danger">{{ messages.validation.positionRequired }}</small>
+      </div>
+      <div class="form-group mb-3">
+        <input type="text" name="department" class="form-control" placeholder="Ingrese su departamento" [(ngModel)]="employeeForm.department" required>
+        <small *ngIf="form.controls['department']?.touched && form.controls['department']?.hasError('required')" class="text-danger">{{ messages.validation.departmentRequired }}</small>
+      </div>
+      <div class="form-group mb-3">
+        <input type="number" name="salary" class="form-control" placeholder="Ingrese su sueldo" [(ngModel)]="employeeForm.salary" min="0" step="any" required>
+        <small *ngIf="form.controls['salary']?.touched && employeeForm.salary <= 0" class="text-danger">{{ messages.validation.salaryPositive }}</small>
+      </div>
+
+      <button class="btn btn-primary me-2" type="submit">{{ editing ? 'Guardar cambios' : 'Crear' }}</button>
+      <button class="btn btn-secondary" type="button" (click)="requestCancel()">{{ editing ? 'Cancelar' : 'Limpiar' }}</button>
+    </form>
+  </div>
+</div>
