@@ -1,5 +1,16 @@
-<div class="row">
-  <div class="col-md-4">
+<main class="employees-page">
+  <header class="page-heading">
+    <p class="eyebrow">Gestión de equipo</p>
+    <h1>Empleados</h1>
+    <p>Administra la información de tu equipo desde un solo lugar.</p>
+  </header>
+
+  <div class="employees-layout">
+    <section class="panel employee-form-panel" aria-labelledby="employee-form-title">
+      <header class="panel-heading">
+        <h2 id="employee-form-title">{{ editingEmployeeId ? 'Editar empleado' : 'Añadir empleado' }}</h2>
+        <p>{{ editingEmployeeId ? 'Actualiza los datos del empleado.' : 'Completa los datos para añadir a alguien al equipo.' }}</p>
+      </header>
     <app-empleado-form
       [employee]="employeeForm"
       [editing]="!!editingEmployeeId"
@@ -8,14 +19,15 @@
       (save)="saveEmployee($event)"
       (cancel)="cleanForm()">
     </app-empleado-form>
-  </div>
+    </section>
 
-  <div class="col-md-8">
+    <section class="panel employee-directory" aria-labelledby="employee-list-title">
     <app-empleado-list
       *ngIf="empleados$ | async as empleados"
       [employees]="empleados"
       (edit)="updateEmployee($event)"
       (delete)="deleteEmployee($event)">
     </app-empleado-list>
+    </section>
   </div>
-</div>
+</main>

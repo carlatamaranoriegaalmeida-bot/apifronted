@@ -1,29 +1,74 @@
-<div class="card">
-  <div class="card-body">
-    <h1>{{ editing ? 'Editar Empleado' : 'Registro de Nuevo Empleado' }}</h1>
-    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="alert alert-success" role="status">{{ successMessage }}</div>
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">{{ errorMessage }}</div>
+<div *ngIf="successMessage" class="alert alert-success" role="status">{{ successMessage }}</div>
 
-    <form #form="ngForm" (ngSubmit)="submit(form)">
-      <div class="form-group mb-3">
-        <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" [(ngModel)]="employeeForm.name" required>
-        <small *ngIf="form.controls['name']?.touched && form.controls['name']?.hasError('required')" class="text-danger">{{ messages.validation.nameRequired }}</small>
-      </div>
-      <div class="form-group mb-3">
-        <input type="text" name="position" class="form-control" placeholder="Ingrese su cargo" [(ngModel)]="employeeForm.position" required>
-        <small *ngIf="form.controls['position']?.touched && form.controls['position']?.hasError('required')" class="text-danger">{{ messages.validation.positionRequired }}</small>
-      </div>
-      <div class="form-group mb-3">
-        <input type="text" name="department" class="form-control" placeholder="Ingrese su departamento" [(ngModel)]="employeeForm.department" required>
-        <small *ngIf="form.controls['department']?.touched && form.controls['department']?.hasError('required')" class="text-danger">{{ messages.validation.departmentRequired }}</small>
-      </div>
-      <div class="form-group mb-3">
-        <input type="number" name="salary" class="form-control" placeholder="Ingrese su sueldo" [(ngModel)]="employeeForm.salary" min="0" step="any" required>
-        <small *ngIf="form.controls['salary']?.touched && employeeForm.salary <= 0" class="text-danger">{{ messages.validation.salaryPositive }}</small>
-      </div>
-
-      <button class="btn btn-primary me-2" type="submit">{{ editing ? 'Guardar cambios' : 'Crear' }}</button>
-      <button class="btn btn-secondary" type="button" (click)="requestCancel()">{{ editing ? 'Cancelar' : 'Limpiar' }}</button>
-    </form>
+<form #form="ngForm" (ngSubmit)="submit(form)" novalidate>
+  <div class="field-group">
+    <label class="field-label" for="employee-name">Nombre completo</label>
+    <input
+      id="employee-name"
+      type="text"
+      class="form-control"
+      [class.is-invalid]="form.controls['name'] && form.controls['name'].touched && form.controls['name'].invalid"
+      name="name"
+      placeholder="Ej. Ana Pérez"
+      autocomplete="name"
+      [(ngModel)]="employeeForm.name"
+      [attr.aria-invalid]="form.controls['name'] && form.controls['name'].touched && form.controls['name'].invalid"
+      [attr.aria-describedby]="form.controls['name'] && form.controls['name'].touched && form.controls['name'].hasError('required') ? 'employee-name-error' : null"
+      required>
+    <small *ngIf="form.controls['name'] && form.controls['name'].touched && form.controls['name'].hasError('required')" id="employee-name-error" class="field-error">{{ messages.validation.nameRequired }}</small>
   </div>
-</div>
+  <div class="field-group">
+    <label class="field-label" for="employee-position">Cargo</label>
+    <input
+      id="employee-position"
+      type="text"
+      class="form-control"
+      [class.is-invalid]="form.controls['position'] && form.controls['position'].touched && form.controls['position'].invalid"
+      name="position"
+      placeholder="Ej. Diseñadora"
+      [(ngModel)]="employeeForm.position"
+      [attr.aria-invalid]="form.controls['position'] && form.controls['position'].touched && form.controls['position'].invalid"
+      [attr.aria-describedby]="form.controls['position'] && form.controls['position'].touched && form.controls['position'].hasError('required') ? 'employee-position-error' : null"
+      required>
+    <small *ngIf="form.controls['position'] && form.controls['position'].touched && form.controls['position'].hasError('required')" id="employee-position-error" class="field-error">{{ messages.validation.positionRequired }}</small>
+  </div>
+  <div class="field-group">
+    <label class="field-label" for="employee-department">Departamento</label>
+    <input
+      id="employee-department"
+      type="text"
+      class="form-control"
+      [class.is-invalid]="form.controls['department'] && form.controls['department'].touched && form.controls['department'].invalid"
+      name="department"
+      placeholder="Ej. Diseño"
+      [(ngModel)]="employeeForm.department"
+      [attr.aria-invalid]="form.controls['department'] && form.controls['department'].touched && form.controls['department'].invalid"
+      [attr.aria-describedby]="form.controls['department'] && form.controls['department'].touched && form.controls['department'].hasError('required') ? 'employee-department-error' : null"
+      required>
+    <small *ngIf="form.controls['department'] && form.controls['department'].touched && form.controls['department'].hasError('required')" id="employee-department-error" class="field-error">{{ messages.validation.departmentRequired }}</small>
+  </div>
+  <div class="field-group">
+    <label class="field-label" for="employee-salary">Salario</label>
+    <input
+      id="employee-salary"
+      type="number"
+      class="form-control"
+      [class.is-invalid]="form.controls['salary'] && form.controls['salary'].touched && (form.controls['salary'].invalid || employeeForm.salary <= 0)"
+      name="salary"
+      placeholder="Ej. 35000"
+      min="0.01"
+      step="0.01"
+      inputmode="decimal"
+      [(ngModel)]="employeeForm.salary"
+      [attr.aria-invalid]="form.controls['salary'] && form.controls['salary'].touched && (form.controls['salary'].invalid || employeeForm.salary <= 0)"
+      [attr.aria-describedby]="form.controls['salary'] && form.controls['salary'].touched && (form.controls['salary'].invalid || employeeForm.salary <= 0) ? 'employee-salary-error' : null"
+      required>
+    <small *ngIf="form.controls['salary'] && form.controls['salary'].touched && (form.controls['salary'].invalid || employeeForm.salary <= 0)" id="employee-salary-error" class="field-error">{{ messages.validation.salaryPositive }}</small>
+  </div>
+
+  <div class="form-actions">
+    <button class="button button-primary" type="submit">{{ editing ? 'Guardar cambios' : 'Crear empleado' }}</button>
+    <button class="button button-secondary" type="button" (click)="requestCancel()">{{ editing ? 'Cancelar' : 'Limpiar' }}</button>
+  </div>
+</form>
