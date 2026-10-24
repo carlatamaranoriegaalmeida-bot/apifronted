@@ -1,1 +1,479 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: light;
+  font-family: 'Segoe UI', sans-serif;
+  color: #17233b;
+  background: #f5f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --color-ink: #17233b;
+  --color-muted: #68758d;
+  --color-primary: #3659d9;
+  --color-primary-dark: #2948bd;
+  --color-border: #e1e7f0;
+  --color-surface: #fff;
+  --color-danger: #b42336;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(213, 225, 255, .5), transparent 34rem),
+    #f5f7fb;
+  color: var(--color-ink);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+[type='submit'] {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(54, 89, 217, .25);
+  outline-offset: 2px;
+}
+
+.employees-page,
+.login-page {
+  width: min(1240px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 56px 0 72px;
+}
+
+.page-heading {
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  margin: 0 0 9px;
+  color: var(--color-primary);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.page-heading h1,
+.login-heading h1 {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: clamp(2rem, 4vw, 2.65rem);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+}
+
+.page-heading p,
+.login-heading p {
+  max-width: 640px;
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.employees-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+}
+
+.panel,
+.login-card {
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+  box-shadow: 0 12px 34px rgba(29, 48, 85, .06);
+}
+
+.employee-form-panel {
+  position: sticky;
+  top: 24px;
+  padding: 26px;
+}
+
+.panel-heading {
+  margin-bottom: 22px;
+}
+
+.panel-heading h2,
+.directory-heading h2 {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.panel-heading p,
+.directory-heading p {
+  margin: 6px 0 0;
+  color: var(--color-muted);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.field-group {
+  margin-bottom: 17px;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #35425a;
+  font-size: .87rem;
+  font-weight: 600;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 13px;
+  border: 1px solid #d7dfeb;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--color-ink);
+  font-size: .94rem;
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+
+.form-control::placeholder {
+  color: #98a3b5;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(54, 89, 217, .12);
+}
+
+.form-control.is-invalid {
+  border-color: #d45262;
+}
+
+.field-error {
+  display: block;
+  margin-top: 6px;
+  color: var(--color-danger);
+  font-size: .8rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: background-color .16s ease, border-color .16s ease, transform .16s ease;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+.button-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.button-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.button-secondary {
+  border-color: var(--color-border);
+  background: #fff;
+  color: #46536b;
+}
+
+.button-secondary:hover:not(:disabled) {
+  background: #f6f8fc;
+}
+
+.button-danger {
+  border-color: #f1c6cb;
+  background: #fff;
+  color: var(--color-danger);
+}
+
+.button-danger:hover:not(:disabled) {
+  background: #fff4f5;
+}
+
+.alert {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.alert-danger {
+  border-color: #f1c6cb;
+  background: #fff5f5;
+  color: #8e2431;
+}
+
+.alert-success {
+  border-color: #bce5d1;
+  background: #effaf4;
+  color: #196b45;
+}
+
+.employee-directory {
+  min-width: 0;
+  padding: 26px;
+}
+
+.directory-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.employee-count {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #334fc1;
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.search-input {
+  max-width: 420px;
+  background: #fbfcfe;
+}
+
+.search-clear {
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary);
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.employee-table th {
+  padding: 13px 16px;
+  background: #f7f9fc;
+  color: #68758d;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.employee-table td {
+  padding: 15px 16px;
+  border-top: 1px solid #edf0f5;
+  color: #35425a;
+  font-size: .9rem;
+}
+
+.employee-table tbody tr:hover {
+  background: #fbfcff;
+}
+
+.employee-name {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.employee-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.employee-actions .button {
+  min-height: 34px;
+  padding: 7px 10px;
+  font-size: .82rem;
+}
+
+.empty-state {
+  padding: 42px 20px;
+  border: 1px dashed #d6deeb;
+  border-radius: 12px;
+  background: #fafbfe;
+  text-align: center;
+}
+
+.empty-state h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.empty-state p {
+  margin: 7px 0 0;
+  color: var(--color-muted);
+  font-size: .88rem;
+}
+
+.login-page {
+  display: grid;
+  min-height: 100vh;
+  align-content: center;
+  justify-items: center;
+}
+
+.login-heading {
+  width: min(100%, 440px);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.login-heading p {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.login-card {
+  width: min(100%, 440px);
+  padding: 32px;
+}
+
+.login-card h2 {
+  margin: 0 0 22px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.login-card .button {
+  width: 100%;
+  margin-top: 7px;
+}
+
+.login-alert {
+  width: min(100%, 440px);
+}
+
+@media (max-width: 860px) {
+  .employees-layout {
+    grid-template-columns: minmax(250px, 310px) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .employee-form-panel,
+  .employee-directory {
+    padding: 21px;
+  }
+}
+
+@media (max-width: 680px) {
+  .employees-page,
+  .login-page {
+    width: min(100% - 32px, 520px);
+    padding-top: 34px;
+    padding-bottom: 42px;
+  }
+
+  .employees-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .employee-form-panel {
+    position: static;
+  }
+
+  .directory-heading {
+    align-items: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .employee-form-panel,
+  .employee-directory,
+  .login-card {
+    padding: 20px;
+  }
+
+  .directory-heading {
+    align-items: flex-start;
+  }
+
+  .employee-count {
+    font-size: .72rem;
+  }
+
+  .form-actions .button {
+    flex: 1 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

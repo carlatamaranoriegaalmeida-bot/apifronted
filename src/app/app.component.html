@@ -1,1 +1,13 @@
-<app-empleado></app-empleado>
+<header class="app-header">
+  <a class="app-brand" routerLink="/" aria-label="Ir al inicio">
+    <span class="brand-mark" aria-hidden="true">E</span>
+    <span>Equipo<span class="brand-accent">.</span></span>
+  </a>
+  <ng-container *ngIf="currentUser$ | async as user">
+    <div class="session-actions">
+      <span *ngIf="user.email" class="session-user">{{ user.email }}</span>
+      <button class="session-button" type="button" (click)="logout()">Cerrar sesión</button>
+    </div>
+  </ng-container>
+</header>
+<router-outlet></router-outlet>
