@@ -19,7 +19,7 @@ interface LoginResponse {
  providedIn: 'root'
 })
 export class AuthService {
- private API_URL = 'http://localhost:3000/api/v1/auth';
+ private API_URL = 'https://18.225.128.127:3000/api/v1/auth';
  private TOKEN_KEY = 'access_token';
  // Flujo reactivo interno del estado de autenticación (Única fuente de verdad en UI)
  private currentUserSubject = new BehaviorSubject<AuthUser | null>(this.getUserFromStorage());
