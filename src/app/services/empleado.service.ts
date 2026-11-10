@@ -7,7 +7,7 @@ import { map, tap } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class EmpleadoService { 
 
-  private apiUrl = 'http://localhost:3000/api/v1/empleados';
+  private apiUrl = 'https://18.225.128.127/api/v1/empleados';
 
   private empleadosSubject = new BehaviorSubject<Employee[]>([]);
 
